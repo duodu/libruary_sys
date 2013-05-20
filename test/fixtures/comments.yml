@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content: MyString
+  uptime: 2013-05-20 22:27:08
+  user_id: 1
+  book_id: 1
+
+two:
+  content: MyString
+  uptime: 2013-05-20 22:27:08
+  user_id: 1
+  book_id: 1

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bookname: MyString
+  bookinfo: MyString
+  uptime: 2013-05-20 22:24:51
+  category_id: 1
+  storage: 1
+  stat_id: 1
+
+two:
+  bookname: MyString
+  bookinfo: MyString
+  uptime: 2013-05-20 22:24:51
+  category_id: 1
+  storage: 1
+  stat_id: 1
