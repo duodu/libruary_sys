@@ -13,9 +13,17 @@
     <td><%= book.id %></td>
     <td><%= book.bookname %></td>
     <td><%= book.bookinfo %></td>
+    <% if book.category %>
     <td><%= book.category.name %></td>
+    <% else %>
+    <td></td>
+    <% end %>
     <td><%= book.storage %></td>
+    <% if book.uptime %>
     <td><%= book.uptime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+    <% else %>
+    <td></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

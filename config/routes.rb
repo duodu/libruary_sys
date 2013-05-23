@@ -1,5 +1,8 @@
 LibruarySys::Application.routes.draw do
   match "books/manage" => "books#book_manage"
+  match "books/manage/category" => "categories#show_cate"
+  match "books/manage/category/add" => "categories#add_cate"
+  match "books/manage/category/add_submit" => "categories#add_cate_submit"
   root :to => "books#list"
   # The priority is based upon order of creation:
   # first created -> highest priority.

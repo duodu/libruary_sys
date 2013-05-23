@@ -1,0 +1,14 @@
+<h1>Manage Categories</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+<% @cates.each do |cate| %>
+  <tr>
+    <td><%= cate.id %></td>
+    <td><%= cate.name %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to 'Add', :action => "add_cate" %>
