@@ -1,4 +1,6 @@
 LibruarySys::Application.routes.draw do
+  match "books/manage" => "books#book_manage"
+  root :to => "books#list"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

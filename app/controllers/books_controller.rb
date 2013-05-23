@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
   #显示所有图书列表
   def list
-    @books = Book.where(["storage>?",0])
+    @books = Book.where(["storage>? and stat_id=?",0,0])
   end
   #分类显示
   def list_cate
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
     #其他分支
   end
   #归还图书
-  def return
+  def return_book
     @borrow = Borrow.find(params[:id])
     @borrow.is_return = 0
     @borrow.storage += 1
@@ -53,6 +53,7 @@ class BooksController < ApplicationController
   #添加新书提交
   def add_submit
     @book = Book.new(params[:book])
+    @book.stat_id = 0
   end
   #添加库存
   def add_storage
@@ -67,7 +68,7 @@ class BooksController < ApplicationController
     @book.save
   end
   #查看库存
-  def book_storage
+  def book_manage
     @books = Book.all
   end
 end
