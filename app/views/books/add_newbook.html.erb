@@ -1,3 +1,10 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
 <%= form_for @book, :url=>{:action => "add_submit"} do |b| %>
 	<div>
 		<%= b.label 'name' %><br />

@@ -50,8 +50,6 @@ class BooksController < ApplicationController
   def add_newbook
     @book = Book.new
     @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
-    #@stat_array = Stat.all.map {|stat| [stat.name, stat.id]}
-    #@cate = Category.all
   end
   #添加新书提交
   def add_submit
@@ -61,8 +59,10 @@ class BooksController < ApplicationController
     @book.uptime = date
     if @book.save
       redirect_to :action => "book_manage"
+      flash[:notice] = ["add success"]
     else
       redirect_to :action => "add_newbook"
+      flash[:notice] = @book.errors.full_messages
     end
   end
   #添加库存

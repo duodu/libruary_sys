@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<%= form_for @cate, :url=>{:action => "update_cate", :id => @cate.id} do |cate| %>
+	<%= cate.label "name"%>
+	<%= cate.text_field :name %>
+	<%= cate.submit "update" %>
+<% end %>
+

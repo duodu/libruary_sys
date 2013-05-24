@@ -1,13 +1,24 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
 <h1>Manage Categories</h1>
 <table>
   <tr>
     <th>ID</th>
     <th>Name</th>
+    <th></th>
+    <th></th>
   </tr>
 <% @cates.each do |cate| %>
   <tr>
     <td><%= cate.id %></td>
     <td><%= cate.name %></td>
+    <td><%= link_to "edit", :action=>"edit_cate", :id=>cate.id %></td>
+    <td><%= link_to "delete", :action=>"delete_cate", :id=>cate.id %></td>
   </tr>
 <% end %>
 </table>

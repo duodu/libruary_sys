@@ -5,6 +5,9 @@ LibruarySys::Application.routes.draw do
   match "books/manage/category/add_submit" => "categories#add_cate_submit"
   match "books/manage/add_newbook" => "books#add_newbook"
   match "books/manage/add_newbook_submit" => "books#add_submit"
+  match "books/manage/category/edit/:id" => "categories#edit_cate"
+  match "books/manage/category/update/:id" => "categories#update_cate"
+  match "books/manage/category/delete/:id" => "categories#delete_cate"
   root :to => "books#list"
   # The priority is based upon order of creation:
   # first created -> highest priority.
