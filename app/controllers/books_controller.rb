@@ -49,11 +49,21 @@ class BooksController < ApplicationController
   #添加新书
   def add_newbook
     @book = Book.new
+    @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
+    #@stat_array = Stat.all.map {|stat| [stat.name, stat.id]}
+    #@cate = Category.all
   end
   #添加新书提交
   def add_submit
     @book = Book.new(params[:book])
-    @book.stat_id = 0
+    @book.stat_id = 0 #可借阅状态
+    date = Time.new.strftime("%Y%m%d%H%M%S")
+    @book.uptime = date
+    if @book.save
+      redirect_to :action => "book_manage"
+    else
+      redirect_to :action => "add_newbook"
+    end
   end
   #添加库存
   def add_storage

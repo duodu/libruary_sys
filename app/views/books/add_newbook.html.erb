@@ -1,0 +1,24 @@
+<%= form_for @book, :url=>{:action => "add_submit"} do |b| %>
+	<div>
+		<%= b.label 'name' %><br />
+		<%= b.text_field :bookname %>
+	</div>
+	<div>
+		<%= b.label 'info' %><br />
+		<%= b.text_area :bookinfo %>
+	</div>
+	<div>
+		<%= b.label 'storage' %><br />
+		<%= b.text_field :storage %>
+	</div>
+	<div>
+		<%= b.label 'category' %><br />
+		<%= b.select :category_id, options_for_select(@cate_array), {:selected=>1} %>
+	</div>
+	<div>
+		<br />	
+		<%= b.submit 'add' %>
+	</div>
+<% end %>
+<br />
+<%= link_to "back", :action => "book_manage" %>
