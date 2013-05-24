@@ -5,4 +5,12 @@ class Book < ActiveRecord::Base
   belongs_to :stat
   has_many :borrows
   has_many :users, :through => :borrows
+  validates_presence_of :bookname, :message => "can't be null"
+  validates_length_of :bookname, :minimum => 5, :message => "must be over 5"
+  validates_presence_of :bookinfo, :message => "can't be null"
+  validates_length_of :bookinfo, :minimum => 10, :message => "must be over 10"
+  validates_presence_of :category_id, :message => "can't be null"
+  validates_presence_of :stat_id, :message => "can't be null"
+  validates_presence_of :storage, :message => "can't be null"
+  validates_presence_of :uptime, :message => "can't be null"
 end
