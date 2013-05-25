@@ -1,0 +1,28 @@
+<h1><%= @user.username %>'s History</h1>
+<% if @borrow_his %>
+<table>
+  <tr>
+    <th>Book</th>
+    <th>Category</th>
+    <th>Operation</th>
+    <th>Date</th>
+  </tr>
+<% @borrow_his.each do |b| %>
+  <tr>
+    <td><%= b.book.bookname %></td>
+    <td><%= b.book.category.name %></td>
+    <% if b.is_return == 1 %>
+    	<td>borrowed</td>
+    <% end %>
+    <% if b.is_return == 0 %>
+    	<td>returned</td>
+    <% end %>
+    <td><%= b.uptime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+  </tr>
+<% end %>
+<% else %>
+	<h2>Empty!</h2>
+<% end %>
+</table>
+<br />
+<%= link_to "back", :controller =>"books", :action=>"list" %>

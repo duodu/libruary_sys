@@ -5,7 +5,7 @@
     <% end %>
   </div>
 <% end %>
-<%= form_for @book, :url=>{:action => "add_submit"} do |b| %>
+<%= form_for @book, :url=>{:action=>"update_book", :id=>@book.id} do |b| %>
 	<div>
 		<%= b.label 'name' %><br />
 		<%= b.text_field :bookname %>
@@ -24,7 +24,7 @@
 	</div>
 	<div>
 		<br />	
-		<%= b.submit 'add' %>
+		<%= b.submit 'update' %>
 	</div>
 <% end %>
 <br />

@@ -13,5 +13,5 @@ class Book < ActiveRecord::Base
   validates_presence_of :stat_id, :message => "can't be null"
   validates_presence_of :storage, :message => "can't be null"
   validates_presence_of :uptime, :message => "can't be null"
-  validates :storage, :numericality => {:only_integer => true}
+  validates :storage, :numericality => {:only_integer => true, :greater_than_or_equal_to => 0}
 end

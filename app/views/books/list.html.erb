@@ -1,3 +1,27 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<% if @user == nil then %>
+	<%= form_tag :controller=>"users", :action=>"login" do %>
+		<%= label_tag "name" %>
+		<%= text_field_tag :username %>
+		<%= label_tag "password" %>
+		<%= password_field_tag :password %>
+		<%= submit_tag "login" %>
+	<% end %>
+	<%= link_to "regist", :controller => "users", :action => "reg"%>
+<% else %>
+	<b>Welcome:</b>
+	<%= @user.username %>
+	<%= link_to "logout", :controller => "users", :action => "logout"%>
+	<%= link_to "edit", :controller => "users", :action => "edit", :id => @user.id %>
+	<br />
+	<%= link_to "history", :controller => "users", :action => "history" %>
+<% end %>
 <h1>Listing books</h1>
 <table>
   <tr>
@@ -7,6 +31,7 @@
     <th>Category</th>
     <th>Storage</th>
     <th>Last borrow time</th>
+    <th></th>
   </tr>
 <% @books.each do |book| %>
   <tr>
@@ -16,6 +41,14 @@
     <td><%= book.category.name %></td>
     <td><%= book.storage %></td>
     <td><%= book.uptime.strftime("%Y-%m-%d %H:%M:%S") %></td>
+    <% if @borrowed %>
+	    <% if @borrowed.empty? or @borrowed.where("book_id=?",book.id).empty? or @borrowed.where("book_id=?",book.id).last.is_return == 0 %>
+	    	<td><%= link_to "borrow", :action => "borrow", :id => book.id %></td>
+	    <% end %>
+	    <% if !@borrowed.empty? && !@borrowed.where("book_id=?",book.id).empty? && @borrowed.where("book_id=?",book.id).last.is_return == 1 %>
+	    	<td><%= link_to "return", :action => "return", :id => book.id %></td>
+	    <% end %>
+    <% end %>
   </tr>
 <% end %>
 </table>
