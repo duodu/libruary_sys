@@ -42,7 +42,10 @@ class BooksController < ApplicationController
           flash[:notice] = ["borrow success"]
         else
           redirect_to :action => "list"
-          flash[:notice] = ["borrow failed",@book.errors.full_messages]
+          flash[:notice] = ["borrow failed"]
+          @book.errors.full_messages.each do |msg|
+            flash[:notice].push msg
+          end
         end
       else
         redirect_to :action => "list"
