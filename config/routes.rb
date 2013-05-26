@@ -1,4 +1,5 @@
 LibruarySys::Application.routes.draw do
+  match "books/manage/login" => "users#admin_login"
   match "books/manage" => "books#book_manage"
   match "books/manage/category" => "categories#show_cate"
   match "books/manage/category/add" => "categories#add_cate"
@@ -9,7 +10,7 @@ LibruarySys::Application.routes.draw do
   match "books/manage/update" => "books#update_book"
   match "books/manage/category/edit/:id" => "categories#edit_cate"
   match "books/manage/category/update/:id" => "categories#update_cate"
-  match "books/manage/category/delete/:id" => "categories#delete_cate"
+  #match "books/manage/category/delete/:id" => "categories#delete_cate"
   match "books/borrow/:id" => "books#borrow"
   match "books/return/:id" => "books#return"
   match "books/login" => "users#login"

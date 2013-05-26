@@ -47,7 +47,7 @@ class UsersController < ApplicationController
     uname=params[:username]
     upass=params[:password]
     user=User.find_by_username_and_password(uname,upass)
-    session[:user_id]=nil
+    reset_session
     if user
       session[:user_id]=user.id
       @user=User.find(user.id)
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
   end
   #注销用户
   def logout
-    session[:user_id]=nil
+    reset_session
     redirect_to :controller => "books", :action => "list"
   end
   #查看历史记录
@@ -73,6 +73,18 @@ class UsersController < ApplicationController
     else
       redirect_to :controller => "books", :action => "list"
       flash[:notice] = ["You need to login first"] 
+    end
+  end
+  #管理员登录
+  def admin_login
+    uname = params[:username]
+    upass = params[:password]
+    reset_session
+    if uname == "admin" && upass == "admin"
+      session[:admin] = "admin"
+      redirect_to :controller => "books", :action => "book_manage"
+    else
+      render :action => "admin_login"
     end
   end
 end

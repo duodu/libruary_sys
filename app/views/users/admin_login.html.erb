@@ -1,0 +1,8 @@
+<%= form_tag :action=>"admin_login" do %>
+	<b>Account:</b>
+	<%= text_field_tag :username %>
+	<b>Password:</b>
+	<%= password_field_tag :password %>
+	<%= submit_tag "login" %>
+<% end %>
+<%= link_to "back", :controller => "books", :action => "list"%>

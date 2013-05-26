@@ -11,14 +11,12 @@
     <th>ID</th>
     <th>Name</th>
     <th></th>
-    <th></th>
   </tr>
 <% @cates.each do |cate| %>
   <tr>
     <td><%= cate.id %></td>
     <td><%= cate.name %></td>
     <td><%= link_to "edit", :action=>"edit_cate", :id=>cate.id %></td>
-    <td><%= link_to "delete", :action=>"delete_cate", :id=>cate.id %></td>
   </tr>
 <% end %>
 </table>

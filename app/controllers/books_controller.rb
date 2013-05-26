@@ -103,41 +103,61 @@ class BooksController < ApplicationController
   end
   #添加新书
   def add_newbook
-    @book = Book.new
-    @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
+    if session[:admin] == "admin"
+      @book = Book.new
+      @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
+    else
+      redirect_to :controller => "users", :action => "admin_login"
+    end
   end
   #添加新书提交
   def add_submit
-    @book = Book.new(params[:book])
-    @book.stat_id = 0 #可借阅状态
-    date = Time.new.strftime("%Y%m%d%H%M%S")
-    @book.uptime = date
-    if @book.save
-      redirect_to :action => "book_manage"
-      flash[:notice] = ["add success"]
+    if session[:admin] == "admin"
+      @book = Book.new(params[:book])
+      @book.stat_id = 0 #可借阅状态
+      date = Time.new.strftime("%Y%m%d%H%M%S")
+      @book.uptime = date
+      if @book.save
+        redirect_to :action => "book_manage"
+        flash[:notice] = ["add success"]
+      else
+        redirect_to :action => "add_newbook"
+        flash[:notice] = @book.errors.full_messages
+      end
     else
-      redirect_to :action => "add_newbook"
-      flash[:notice] = @book.errors.full_messages
+      redirect_to :controller => "users", :action => "admin_login"
     end
   end
   #查看库存
   def book_manage
-    @books = Book.all
+    if session[:admin] == "admin"
+      @books = Book.all
+    else
+      redirect_to :controller => "users", :action => "admin_login"
+    end
   end
   #编辑书信息
   def edit_book
-    @book = Book.find(params[:id])
-    @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
+    if session[:admin] == "admin"
+      @book = Book.find(params[:id])
+      @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
+    else
+      redirect_to :controller => "users", :action => "admin_login"
+    end
   end
   #更新书信息
   def update_book
-    @book = Book.find(params[:id])
-    if @book.update_attributes(params[:book])
-      redirect_to :action => "book_manage"
-      flash[:notice] = ["edit success"]
+    if session[:admin] == "admin"
+      @book = Book.find(params[:id])
+      if @book.update_attributes(params[:book])
+        redirect_to :action => "book_manage"
+        flash[:notice] = ["edit success"]
+      else
+        redirect_to :action => "edit_book", :id => @book.id
+        flash[:notice] = @book.errors.full_messages
+      end
     else
-      redirect_to :action => "edit_book", :id => @book.id
-      flash[:notice] = @book.errors.full_messages
+      redirect_to :controller => "users", :action => "admin_login"
     end
   end
 end
