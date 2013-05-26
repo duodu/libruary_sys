@@ -2,6 +2,8 @@ class BooksController < ApplicationController
   #显示所有图书列表
   def list
     @books = Book.where("stat_id=?",0)
+    @category = Category.all
+    @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
     if session[:user_id]
       @user = User.find(session[:user_id])
       @borrowed = Borrow.where("user_id=?",session[:user_id])
@@ -9,8 +11,15 @@ class BooksController < ApplicationController
   end
   #分类显示
   def list_cate
-    cate_id = params[:cate_id]
+    cate_id = params[:id]
+    @category = Category.all
     @books = Book.where(["category_id=?",cate_id])
+    @cate_array = Category.all.map { |cate| [cate.name, cate.id] }
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+      @borrowed = Borrow.where("user_id=?",session[:user_id])
+    end
+    render :action => "list"
   end
   #按借阅状态显示
   def list_stat

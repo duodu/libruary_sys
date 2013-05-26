@@ -22,6 +22,11 @@
 	<br />
 	<%= link_to "history", :controller => "users", :action => "history" %>
 <% end %>
+<%= form_tag :action=>"list_cate" do %>
+	<%= select_tag :id, options_for_select(@cate_array) %>
+	<%= submit_tag "query" %>
+<% end %>
+<%= link_to "show all", :action => "list" %>
 <h1>Listing books</h1>
 <table>
   <tr>
