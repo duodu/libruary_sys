@@ -1,0 +1,43 @@
+<% if flash[:notice] %>
+  <div style="color: red">
+  	<% flash[:notice].each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </div>
+<% end %>
+<h1><%= @book.bookname %></h1>
+<div>
+<b>Book Information</b>
+<br />
+<%= @book.bookinfo %>
+<br />
+<br />
+</div>
+<div>
+<% if !@comments.empty? %>
+	<% @comments.each do |c| %>
+		<b>Comment:</b>
+		<%= c.content %>
+		<br />
+		<b>Auther:</b>
+		<% if c.user_id != 0 %>
+			<%= c.user.username %>
+		<% else %>
+			customer
+		<% end %>
+		<br />
+		<br />
+	<% end %>
+<% end %>
+</div>
+<div>
+<%= form_for @comment, :url=>{:controller=>"comments",:action=>"add_submit",:id=>@book.id} do |nc| %>
+	<b><%= nc.label "Comment" %></b>
+	<br />
+	<%= nc.text_area :content %>
+	<br />
+	<%= nc.submit "add comment" %>
+<% end %>
+</div>
+<br />
+<%= link_to "back", :action => "list" %>

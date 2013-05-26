@@ -20,6 +20,13 @@ class BooksController < ApplicationController
   #显示某一本书
   def show
     @book = Book.find(params[:id])
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+    else
+      @user = nil
+    end
+    @comments = Comment.where("book_id=?",@book.id)
+    @comment = Comment.new
   end
   #借阅图书
   def borrow
@@ -85,16 +92,6 @@ class BooksController < ApplicationController
       flash[:notice] = ["You need to login first"]
     end
   end
-  #添加书评
-  def book_comment
-    @comment = Comment.new
-  end
-  #添加书评提交
-  def book_comment_submit
-    @comment = Comment.new(params[:comment])
-    @comment.book_id = params[:id]
-    @comment.save
-  end
   #添加新书
   def add_newbook
     @book = Book.new
@@ -113,18 +110,6 @@ class BooksController < ApplicationController
       redirect_to :action => "add_newbook"
       flash[:notice] = @book.errors.full_messages
     end
-  end
-  #添加库存
-  def add_storage
-    @book = Book.find(params[:id])
-    @book.storage += 1
-    @book.save
-  end
-  #减少库存
-  def sub_storage
-    @book = Book.find(params[:id])
-    @book.storage -= 1
-    @book.save
   end
   #查看库存
   def book_manage

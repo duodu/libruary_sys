@@ -19,6 +19,8 @@ LibruarySys::Application.routes.draw do
   match "users/edit/:id" => "users#edit"
   match "users/edit_submit/:id" => "users#edit_submit"
   match "users/history" => "users#history"
+  match "books/show/:id" => "books#show"
+  match "comments/add" => "comments#add_submit"
   root :to => "books#list"
   # The priority is based upon order of creation:
   # first created -> highest priority.
